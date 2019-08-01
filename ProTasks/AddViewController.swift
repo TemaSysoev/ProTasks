@@ -48,13 +48,11 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     
     func addTaskAction() { //Добаление заадчи
-        if nameTextField.text != nil {
-            Public.newTaskPublic = "² " + nameTextField.text!
+        if nameTextField.text == "" {
+            Public.newTaskPublic = "⁰ " + nameTextField.text!
             
-        } else {print("Error!")}
-        if nameTextField.text == ""{
-            Public.newTaskPublic = "² New tasks"
-        }
+        } else { dismissAction() }
+       
         
         Public.tasks.append(Public.newTaskPublic) //добавление в массив
         mainVC.tableView.reloadData() //Обновление TableView

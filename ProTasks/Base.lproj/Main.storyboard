@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxc-8L-hwa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxc-8L-hwa">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Tasks-->
@@ -15,13 +14,13 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" id="rkK-mS-cLk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Iuv-OD-eTp">
                             <rect key="frame" x="0.0" y="100" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem image="plus.circle.fill" catalog="system" id="8FL-2w-CU3">
-                                    <color key="tintColor" cocoaTouchSystemColor="systemRedColor"/>
+                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
                                         <action selector="showAddTask:" destination="Y5L-Hi-9RO" id="0nb-z7-aVS"/>
                                         <segue destination="8vw-7D-bXP" kind="modal" id="nxS-pH-NAf"/>
@@ -30,7 +29,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="pUv-c8-WAO"/>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="ehG-mN-F4p"/>
                                 <barButtonItem image="line.horizontal.3.decrease.circle.fill" catalog="system" id="vlX-La-Ajz">
-                                    <color key="tintColor" cocoaTouchSystemColor="systemRedColor"/>
+                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
                                         <action selector="sortTasks:" destination="Y5L-Hi-9RO" id="doY-0E-94d"/>
                                     </connections>
@@ -57,7 +56,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" largeTitleDisplayMode="always" id="e4Z-dg-MC5">
                         <barButtonItem key="rightBarButtonItem" title="Total:" id="yDv-pa-TjL">
-                            <color key="tintColor" cocoaTouchSystemColor="systemRedColor"/>
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -89,40 +88,24 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVG-zv-ztp">
-                                <rect key="frame" x="368" y="75" width="37" height="30.833333333333343"/>
+                                <rect key="frame" x="368" y="74.5" width="37" height="31.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="2zv-dY-BYV"/>
                                     <constraint firstAttribute="height" constant="29.670000000000002" id="rAI-NK-2Ja"/>
                                 </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="systemRedColor"/>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="tray.and.arrow.down.fill" catalog="system"/>
                                 <connections>
                                     <action selector="addAction:" destination="8vw-7D-bXP" eventType="touchUpInside" id="o84-Bl-cNk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoi-Xj-DuS">
-                                <rect key="frame" x="383" y="19.999999999999996" width="22" height="22.666666666666675"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="Tcz-0M-BOc"/>
-                                    <constraint firstAttribute="height" constant="22" id="kmH-Th-e37"/>
-                                </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="systemRedColor"/>
-                                <state key="normal" backgroundImage="gear" catalog="system">
-                                    <color key="titleColor" cocoaTouchSystemColor="systemRedColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="efl-iN-Ube" kind="show" id="W0S-Rh-1uF"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ZdU-eI-9r1" firstAttribute="trailing" secondItem="zoi-Xj-DuS" secondAttribute="trailing" constant="9" id="Amo-cN-K6S"/>
                             <constraint firstItem="CVG-zv-ztp" firstAttribute="leading" secondItem="4WR-jT-Q5I" secondAttribute="trailing" constant="8" id="KKd-nr-CTW"/>
                             <constraint firstItem="4WR-jT-Q5I" firstAttribute="leading" secondItem="ZdU-eI-9r1" secondAttribute="leading" constant="20" id="Nmw-wt-B6N"/>
                             <constraint firstItem="ZdU-eI-9r1" firstAttribute="trailing" secondItem="CVG-zv-ztp" secondAttribute="trailing" constant="9" id="SVa-bT-BXd"/>
-                            <constraint firstItem="zoi-Xj-DuS" firstAttribute="top" secondItem="ZdU-eI-9r1" secondAttribute="top" constant="20" id="bWn-IO-REW"/>
-                            <constraint firstItem="CVG-zv-ztp" firstAttribute="top" secondItem="zoi-Xj-DuS" secondAttribute="bottom" constant="36" id="p0H-pb-NvX"/>
+                            <constraint firstItem="CVG-zv-ztp" firstAttribute="top" secondItem="ZdU-eI-9r1" secondAttribute="top" constant="78" id="mSu-RF-s7d"/>
                             <constraint firstItem="4WR-jT-Q5I" firstAttribute="top" secondItem="ZdU-eI-9r1" secondAttribute="top" constant="74" id="znA-kW-HNo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZdU-eI-9r1"/>
@@ -135,21 +118,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3m-sZ-nOO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876.8115942028987" y="92.410714285714278"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="0Mh-rZ-lHx">
-            <objects>
-                <viewController id="efl-iN-Ube" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yJN-ZG-pPw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="Psf-Ff-2GU"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="co8-qz-IrU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2719" y="-16"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tfK-kZ-n0x">
@@ -172,7 +140,6 @@
     </scenes>
     <resources>
         <image name="chevron.left.circle.fill" catalog="system" width="64" height="62"/>
-        <image name="gear" catalog="system" width="64" height="60"/>
         <image name="line.horizontal.3.decrease.circle.fill" catalog="system" width="64" height="62"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="62"/>
         <image name="tray.and.arrow.down.fill" catalog="system" width="64" height="58"/>

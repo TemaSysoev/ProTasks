@@ -110,17 +110,10 @@ class MainViewTableViewController: UITableViewController {
     }
     
     func saveDoneCounter(tasks:Int) {
-        
         NSUbiquitousKeyValueStore.default.set(Public.doneTasksCouner, forKey: "tasksCounter")
-       
-        //MKiCloudSync.start(withPrefix: "tasks")
     }
     func loadDoneCounter() -> Int {
-        if NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter")  != nil {
-            //MKiCloudSync.start(withPrefix: "tasks")
-            return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
-        } else {return 0}
-        
+       return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
     }
     
     
@@ -152,13 +145,6 @@ class MainViewTableViewController: UITableViewController {
        
         
         NSUbiquitousKeyValueStore.default.synchronize()
-        
-        
-        
-        
-        //toolBar.clipsToBounds = true //Привязка тулбара
-        
-        
         Public.tasks = loadTasks() as! [String] //Загрузка списка задач
         Public.doneTasksCouner = loadDoneCounter()
         self.totalTasks.title = ""
@@ -246,7 +232,7 @@ class MainViewTableViewController: UITableViewController {
     }
     
     func pushUpAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "\(UIApplicationShortcutIcon.IconType.favorite)"){_,_,_ in
+        let action = UIContextualAction(style: .normal, title: "↑"){_,_,_ in
             NSUbiquitousKeyValueStore.default.synchronize()
             let movingElement = Public.tasks.remove(at: indexPath.row)
             let index = IndexPath(row: 0, section: 0) //Первая позиция
@@ -263,18 +249,11 @@ class MainViewTableViewController: UITableViewController {
             if task[0] == "²" {
                 task[0] = "¹"
             }
-            
-            
-            
-            
-            
             Public.tasks[0] = String(task)
             
             
             self.tableView.reloadData()
-            
             self.tableView.cellForRow(at: index)?.textLabel!.font = UIFont.boldSystemFont(ofSize: 18.0) //Изменение шрифта задачи
-            
             self.saveTasks(tasks: Public.tasks)
         }
         action.backgroundColor = UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
@@ -282,7 +261,7 @@ class MainViewTableViewController: UITableViewController {
         return action
     }
     func doneAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: ""){_,_,_ in
+        let action = UIContextualAction(style: .normal, title: "✓"){_,_,_ in
             
             Public.tasks.remove(at: indexPath.row)
             NSUbiquitousKeyValueStore.default.synchronize()
@@ -293,7 +272,7 @@ class MainViewTableViewController: UITableViewController {
             self.saveTasks(tasks: Public.tasks)
         }
         action.backgroundColor = .red
-        action.image = UIImage(systemName: "mark")
+       
         return action
     }
     
