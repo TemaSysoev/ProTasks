@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yxc-8L-hwa">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,28 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Iuv-OD-eTp">
-                            <rect key="frame" x="0.0" y="100" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem image="plus.circle.fill" catalog="system" id="8FL-2w-CU3">
-                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <connections>
-                                        <action selector="showAddTask:" destination="Y5L-Hi-9RO" id="0nb-z7-aVS"/>
-                                        <segue destination="8vw-7D-bXP" kind="modal" id="nxS-pH-NAf"/>
-                                    </connections>
-                                </barButtonItem>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="pUv-c8-WAO"/>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="ehG-mN-F4p"/>
-                                <barButtonItem image="line.horizontal.3.decrease.circle.fill" catalog="system" id="vlX-La-Ajz">
-                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <connections>
-                                        <action selector="sortTasks:" destination="Y5L-Hi-9RO" id="doY-0E-94d"/>
-                                    </connections>
-                                </barButtonItem>
-                            </items>
-                            <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="VIs-Be-D4Y">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -54,16 +32,33 @@
                             <outlet property="delegate" destination="Y5L-Hi-9RO" id="zeX-vr-Ool"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem image="plus.circle.fill" catalog="system" id="8FL-2w-CU3">
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="showAddTask:" destination="Y5L-Hi-9RO" id="0nb-z7-aVS"/>
+                                <segue destination="8vw-7D-bXP" kind="modal" id="nxS-pH-NAf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pUv-c8-WAO"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ykh-Ca-rzV"/>
+                        <barButtonItem image="line.horizontal.3.decrease.circle.fill" catalog="system" id="vlX-La-Ajz">
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="sortTasks:" destination="Y5L-Hi-9RO" id="doY-0E-94d"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Tasks" largeTitleDisplayMode="always" id="e4Z-dg-MC5">
                         <barButtonItem key="rightBarButtonItem" title="Total:" id="yDv-pa-TjL">
                             <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addButtonItem" destination="8FL-2w-CU3" id="i6Z-6X-4xS"/>
                         <outlet property="navBar" destination="e4Z-dg-MC5" id="kaB-xR-dMK"/>
                         <outlet property="sortButton" destination="vlX-La-Ajz" id="hw8-wM-90e"/>
-                        <outlet property="toolBar" destination="Iuv-OD-eTp" id="Aza-jI-om2"/>
                         <outlet property="totalTasks" destination="yDv-pa-TjL" id="VFE-Pq-Xw4"/>
                     </connections>
                 </tableViewController>
@@ -99,13 +94,29 @@
                                     <action selector="addAction:" destination="8vw-7D-bXP" eventType="touchUpInside" id="o84-Bl-cNk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFK-Sb-ea0">
+                                <rect key="frame" x="20" y="118" width="172" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172" id="FMa-Xs-IC5"/>
+                                    <constraint firstAttribute="height" constant="22" id="dTH-b8-Mw7"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title=" Enter Focus Mode" image="timer" catalog="system">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="poR-RB-IyU" kind="modal" id="yaQ-9a-B0F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="CVG-zv-ztp" firstAttribute="leading" secondItem="4WR-jT-Q5I" secondAttribute="trailing" constant="8" id="KKd-nr-CTW"/>
+                            <constraint firstItem="OFK-Sb-ea0" firstAttribute="top" secondItem="4WR-jT-Q5I" secondAttribute="bottom" constant="8" id="Lfj-xD-F5y"/>
                             <constraint firstItem="4WR-jT-Q5I" firstAttribute="leading" secondItem="ZdU-eI-9r1" secondAttribute="leading" constant="20" id="Nmw-wt-B6N"/>
                             <constraint firstItem="ZdU-eI-9r1" firstAttribute="trailing" secondItem="CVG-zv-ztp" secondAttribute="trailing" constant="9" id="SVa-bT-BXd"/>
                             <constraint firstItem="CVG-zv-ztp" firstAttribute="top" secondItem="ZdU-eI-9r1" secondAttribute="top" constant="78" id="mSu-RF-s7d"/>
+                            <constraint firstItem="OFK-Sb-ea0" firstAttribute="leading" secondItem="ZdU-eI-9r1" secondAttribute="leading" constant="20" id="ydj-RI-TWm"/>
                             <constraint firstItem="4WR-jT-Q5I" firstAttribute="top" secondItem="ZdU-eI-9r1" secondAttribute="top" constant="74" id="znA-kW-HNo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZdU-eI-9r1"/>
@@ -119,16 +130,63 @@
             </objects>
             <point key="canvasLocation" x="1876.8115942028987" y="92.410714285714278"/>
         </scene>
+        <!--Focus Assist View View Controller-->
+        <scene sceneID="xfS-p3-xUg">
+            <objects>
+                <viewController id="poR-RB-IyU" customClass="FocusAssistViewViewController" customModule="ProTasks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aC5-xo-E8N">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="byc-mO-eYC">
+                                <rect key="frame" x="20" y="420" width="374" height="2"/>
+                                <color key="progressTintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhS-1T-INt">
+                                <rect key="frame" x="20" y="367" width="374" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Twj-g2-ZrL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="byc-mO-eYC" firstAttribute="top" secondItem="KhS-1T-INt" secondAttribute="bottom" constant="8" id="IuU-qE-dCK"/>
+                            <constraint firstItem="tbt-BN-2un" firstAttribute="trailing" secondItem="KhS-1T-INt" secondAttribute="trailing" constant="20" id="RAL-DW-Wjz"/>
+                            <constraint firstItem="byc-mO-eYC" firstAttribute="leading" secondItem="aC5-xo-E8N" secondAttribute="leadingMargin" id="Xks-CV-G8b"/>
+                            <constraint firstItem="byc-mO-eYC" firstAttribute="trailing" secondItem="aC5-xo-E8N" secondAttribute="trailingMargin" id="fCB-DR-riR"/>
+                            <constraint firstItem="KhS-1T-INt" firstAttribute="leading" secondItem="tbt-BN-2un" secondAttribute="leading" constant="20" id="flc-Q2-8uz"/>
+                            <constraint firstItem="byc-mO-eYC" firstAttribute="centerX" secondItem="tbt-BN-2un" secondAttribute="centerX" id="n0i-UZ-9GK"/>
+                            <constraint firstItem="KhS-1T-INt" firstAttribute="top" secondItem="tbt-BN-2un" secondAttribute="top" constant="367" id="zaQ-Rn-PQ8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tbt-BN-2un"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="KhS-1T-INt" id="qSz-Ax-plA"/>
+                        <outlet property="timeProgress" destination="byc-mO-eYC" id="bhz-6a-K5m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0KX-11-oab" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2579.7101449275365" y="91.741071428571431"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tfK-kZ-n0x">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yxc-8L-hwa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="yxc-8L-hwa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="chevron.left.circle.fill" catalog="system" largeTitles="YES" id="8sF-9k-GmL">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g7y-7l-QqV">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Y5L-Hi-9RO" kind="relationship" relationship="rootViewController" id="i2r-Od-40b"/>
                     </connections>
@@ -142,6 +200,7 @@
         <image name="chevron.left.circle.fill" catalog="system" width="64" height="62"/>
         <image name="line.horizontal.3.decrease.circle.fill" catalog="system" width="64" height="62"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="62"/>
+        <image name="timer" catalog="system" width="64" height="62"/>
         <image name="tray.and.arrow.down.fill" catalog="system" width="64" height="58"/>
     </resources>
 </document>

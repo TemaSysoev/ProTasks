@@ -48,8 +48,8 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     
     func addTaskAction() { //Добаление заадчи
-        if nameTextField.text == "" {
-            Public.newTaskPublic = "⁰ " + nameTextField.text!
+        if nameTextField.text != "" {
+            Public.newTaskPublic = "² " + nameTextField.text!
             
         } else { dismissAction() }
        
@@ -65,14 +65,15 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true)
     }
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
+        let focusVS = segue.destination as! FocusAssistViewViewController //Ссылка на экран добавления задачи
+        focusVS.addTaskVC = self
      }
-     */
-    
+     
 }

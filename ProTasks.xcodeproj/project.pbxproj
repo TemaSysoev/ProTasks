@@ -18,6 +18,7 @@
 		E065F46C22ABD09100A6E743 /* MainViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F46B22ABD09100A6E743 /* MainViewControllerTableView.swift */; };
 		E065F46E22ABD0C900A6E743 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F46D22ABD0C900A6E743 /* AddViewController.swift */; };
 		E065F47222ABD12100A6E743 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E065F47122ABD12100A6E743 /* CloudKit.framework */; };
+		E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		E065F46D22ABD0C900A6E743 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		E065F46F22ABD11C00A6E743 /* ProTasks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProTasks.entitlements; sourceTree = "<group>"; };
 		E065F47122ABD12100A6E743 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusAssistViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				E065F46B22ABD09100A6E743 /* MainViewControllerTableView.swift */,
 				E065F46D22ABD0C900A6E743 /* AddViewController.swift */,
 				E065F43E22ABCEB000A6E743 /* Main.storyboard */,
+				E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */,
 				E065F44422ABCEB800A6E743 /* Assets.xcassets */,
 				E065F44622ABCEB800A6E743 /* LaunchScreen.storyboard */,
 				E065F44922ABCEB800A6E743 /* Info.plist */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E065F44322ABCEB000A6E743 /* ProTasks.xcdatamodeld in Sources */,
+				E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */,
 				E065F46E22ABD0C900A6E743 /* AddViewController.swift in Sources */,
 				E065F46C22ABD09100A6E743 /* MainViewControllerTableView.swift in Sources */,
 				E065F43922ABCEB000A6E743 /* AppDelegate.swift in Sources */,
