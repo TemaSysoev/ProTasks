@@ -12,17 +12,26 @@ class FocusAssistViewViewController: UIViewController {
     
     var addTaskVC = AddTaskViewController()
     
-    var time = Int()
+    var time = 25
     var timer = Timer()
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeProgress: UIProgressView!
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = addTaskVC.nameTextField.text
-        
+        timeLabel.text = "\(time) mins left"
+        timeProgress.progress = (25-Float(time))/25
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    @objc func updateTimer(){
+        time -= 1
+        timeLabel.text = "\(time) mins left"
+        timeProgress.progress = (25-Float(time))/25
     }
     
 

@@ -81,6 +81,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="returnButtonTapped:" destination="8vw-7D-bXP" eventType="primaryActionTriggered" id="3MT-RP-t4i"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVG-zv-ztp">
                                 <rect key="frame" x="368" y="74.5" width="37" height="31.5"/>
@@ -138,10 +141,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="byc-mO-eYC">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="byc-mO-eYC">
                                 <rect key="frame" x="20" y="420" width="374" height="2"/>
                                 <color key="progressTintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLs-Gq-WtQ">
+                                <rect key="frame" x="20" y="451" width="374" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="myG-Sb-8y8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhS-1T-INt">
                                 <rect key="frame" x="20" y="367" width="374" height="45"/>
                                 <constraints>
@@ -154,9 +166,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="fLs-Gq-WtQ" firstAttribute="top" secondItem="byc-mO-eYC" secondAttribute="bottom" constant="29" id="DxQ-Vg-BHD"/>
                             <constraint firstItem="byc-mO-eYC" firstAttribute="top" secondItem="KhS-1T-INt" secondAttribute="bottom" constant="8" id="IuU-qE-dCK"/>
+                            <constraint firstItem="fLs-Gq-WtQ" firstAttribute="leading" secondItem="tbt-BN-2un" secondAttribute="leading" constant="20" id="L0r-xC-uHf"/>
                             <constraint firstItem="tbt-BN-2un" firstAttribute="trailing" secondItem="KhS-1T-INt" secondAttribute="trailing" constant="20" id="RAL-DW-Wjz"/>
                             <constraint firstItem="byc-mO-eYC" firstAttribute="leading" secondItem="aC5-xo-E8N" secondAttribute="leadingMargin" id="Xks-CV-G8b"/>
+                            <constraint firstItem="tbt-BN-2un" firstAttribute="trailing" secondItem="fLs-Gq-WtQ" secondAttribute="trailing" constant="20" id="d7Z-tw-ier"/>
                             <constraint firstItem="byc-mO-eYC" firstAttribute="trailing" secondItem="aC5-xo-E8N" secondAttribute="trailingMargin" id="fCB-DR-riR"/>
                             <constraint firstItem="KhS-1T-INt" firstAttribute="leading" secondItem="tbt-BN-2un" secondAttribute="leading" constant="20" id="flc-Q2-8uz"/>
                             <constraint firstItem="byc-mO-eYC" firstAttribute="centerX" secondItem="tbt-BN-2un" secondAttribute="centerX" id="n0i-UZ-9GK"/>
@@ -166,6 +181,7 @@
                     </view>
                     <connections>
                         <outlet property="nameLabel" destination="KhS-1T-INt" id="qSz-Ax-plA"/>
+                        <outlet property="timeLabel" destination="fLs-Gq-WtQ" id="33D-kQ-Ryo"/>
                         <outlet property="timeProgress" destination="byc-mO-eYC" id="bhz-6a-K5m"/>
                     </connections>
                 </viewController>
