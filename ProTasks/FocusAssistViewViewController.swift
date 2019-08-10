@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class FocusAssistViewViewController: UIViewController {
     
@@ -19,19 +20,35 @@ class FocusAssistViewViewController: UIViewController {
     @IBOutlet weak var timeProgress: UIProgressView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    var taskName = String()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = addTaskVC.nameTextField.text
+        taskName = addTaskVC.nameTextField.text!
+        nameLabel.text = taskName
         timeLabel.text = "\(time) mins left"
         timeProgress.progress = (25-Float(time))/25
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+        
+        
     }
     @objc func updateTimer(){
         time -= 1
         timeLabel.text = "\(time) mins left"
         timeProgress.progress = (25-Float(time))/25
+        if (time == 0) && (nameLabel.text != "Break time!") {
+            AudioServicesPlayAlertSound(SystemSoundID(1005))
+            time = 5
+            timeLabel.text = "\(time) mins left"
+            nameLabel.text = "Break time!"
+        }
+        if (time == 0) && (nameLabel.text == "Break time!") {
+            AudioServicesPlayAlertSound(SystemSoundID(1005))
+            time = 25
+            timeLabel.text = "\(time) mins left"
+            nameLabel.text = taskName
+        }
     }
     
 

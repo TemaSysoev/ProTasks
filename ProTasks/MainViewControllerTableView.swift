@@ -89,6 +89,7 @@ class MainViewTableViewController: UITableViewController {
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
+    @IBOutlet weak var bugButton: UIButton!
     
     
     
@@ -96,16 +97,23 @@ class MainViewTableViewController: UITableViewController {
     
     
     func saveTasks(tasks:Array<Any>) { //Сохранение массива задач
-        //UserDefaults.standard.set(Public.tasks, forKey: "tasksKey")
+        UserDefaults.standard.set(Public.tasks, forKey: "tasksKey")
         NSUbiquitousKeyValueStore.default.set(Public.tasks, forKey: "tasksKey")
-        //MKiCloudSync.start(withPrefix: "tasks")
+        
     }
     func loadTasks() -> Array<Any>{ //Чтение массива задач
         if NSUbiquitousKeyValueStore.default.array(forKey: "tasksKey") != nil {
-            //MKiCloudSync.start(withPrefix: "tasks")
             //return UserDefaults.standard.array(forKey:"tasksKey")!
             return NSUbiquitousKeyValueStore.default.array(forKey: "tasksKey")!
-        } else {return ["Hello"]}
+        } else {
+            if UserDefaults.standard.array(forKey:"tasksKey") != nil {
+                
+                return UserDefaults.standard.array(forKey:"tasksKey")!
+            } else {
+                return [""]
+            }
+            
+        }
         
     }
     
@@ -113,7 +121,7 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.set(Public.doneTasksCouner, forKey: "tasksCounter")
     }
     func loadDoneCounter() -> Int {
-       return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
+        return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
     }
     
     
@@ -122,6 +130,7 @@ class MainViewTableViewController: UITableViewController {
         
         self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
         NSUbiquitousKeyValueStore.default.synchronize()
+        
         self.totalTasks.title = ""
     }
     
@@ -141,22 +150,11 @@ class MainViewTableViewController: UITableViewController {
         
         self.navigationController?.navigationBar.prefersLargeTitles = true //большой красивый заголовк
         //navigationItem.hidesBackButton = true //Отключение кнопки Назад
-        
        
-        
         NSUbiquitousKeyValueStore.default.synchronize()
         Public.tasks = loadTasks() as! [String] //Загрузка списка задач
         Public.doneTasksCouner = loadDoneCounter()
         self.totalTasks.title = ""
-        if Public.doneTasksCouner == 0{ //Наполнение списка, если он пуст ПОПРАВИТЬ
-            let simple1 = "Swipe left to Done"
-            let simple2 = "Swipe right to Prioritize task"
-            let simple3 = "Tap + to add new tasks"
-            Public.tasks.append(simple1)
-            Public.tasks.append(simple2)
-            Public.tasks.append(simple3)
-            saveTasks(tasks: Public.tasks)
-        }
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -180,13 +178,6 @@ class MainViewTableViewController: UITableViewController {
         let task = Public.tasks[indexPath.row] //Новый элемент массива
         
         cell.textLabel?.text = task
-        
-        
-        /*Настройки отображения cell (на всякий)
-         cell.layer.cornerRadius = 6
-         cell.layer.borderWidth = 3.0
-         cell.layer.borderColor = UIColor.white.cgColor
-         */
         cell.selectionStyle = UITableViewCell.SelectionStyle.none //отключения выбора ячейки
         saveTasks(tasks: Public.tasks)
         return cell
@@ -272,7 +263,7 @@ class MainViewTableViewController: UITableViewController {
             self.saveTasks(tasks: Public.tasks)
         }
         action.backgroundColor = .red
-       
+        
         return action
     }
     
