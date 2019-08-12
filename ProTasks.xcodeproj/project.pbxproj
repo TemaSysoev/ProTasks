@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0096A132301C07800DDF2E9 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = E0096A122301C07800DDF2E9 /* AppIcon.appiconset */; };
 		E065F43922ABCEB000A6E743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F43822ABCEB000A6E743 /* AppDelegate.swift */; };
 		E065F43B22ABCEB000A6E743 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F43A22ABCEB000A6E743 /* SceneDelegate.swift */; };
 		E065F44022ABCEB000A6E743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E065F43E22ABCEB000A6E743 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0096A122301C07800DDF2E9 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppIcon.appiconset; path = iOS/AppIcon.appiconset; sourceTree = SOURCE_ROOT; };
 		E065F43522ABCEB000A6E743 /* ProTasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProTasks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E065F43822ABCEB000A6E743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E065F43A22ABCEB000A6E743 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				E065F46D22ABD0C900A6E743 /* AddViewController.swift */,
 				E065F43E22ABCEB000A6E743 /* Main.storyboard */,
 				E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */,
+				E0096A122301C07800DDF2E9 /* AppIcon.appiconset */,
 				E065F44422ABCEB800A6E743 /* Assets.xcassets */,
 				E065F44622ABCEB800A6E743 /* LaunchScreen.storyboard */,
 				E065F44922ABCEB800A6E743 /* Info.plist */,
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0096A132301C07800DDF2E9 /* AppIcon.appiconset in Resources */,
 				E065F44822ABCEB800A6E743 /* LaunchScreen.storyboard in Resources */,
 				E065F44522ABCEB800A6E743 /* Assets.xcassets in Resources */,
 				E065F44022ABCEB000A6E743 /* Main.storyboard in Resources */,
@@ -468,7 +472,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = K52EJNPD2V;
 				INFOPLIST_FILE = ProTasks/Info.plist;
@@ -497,7 +501,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = K52EJNPD2V;
 				INFOPLIST_FILE = ProTasks/Info.plist;

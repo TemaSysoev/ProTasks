@@ -74,13 +74,60 @@ struct Public {
     static var doneTasksCouner = 0
 }
 
+typealias Animation = (UITableViewCell, IndexPath, UITableView) -> Void
+final class Animator {
+    private var hasAnimatedAllCells = false
+    private let animation: Animation
+
+    init(animation: @escaping Animation) {
+        self.animation = animation
+    }
+
+    func animate(cell: UITableViewCell, at indexPath: IndexPath, in tableView: UITableView) {
+        guard !hasAnimatedAllCells else {
+            return
+        }
+
+        animation(cell, indexPath, tableView)
+
+       // hasAnimatedAllCells = tableView.isLastVisibleCell(at: indexPath)
+    }
+}
 
 
 
 class MainViewTableViewController: UITableViewController {
+    enum AnimationFactory {
+
+    static func makeFadeAnimation(duration: TimeInterval, delayFactor: Double) -> Animation {
+        return { cell, indexPath, _ in
+            cell.alpha = 0
+
+            UIView.animate(
+                withDuration: duration,
+                delay: delayFactor * Double(indexPath.row),
+                animations: {
+                    cell.alpha = 1
+            })
+        }
+    }
     
-    
-    
+    static func makeMoveUpWithBounce(rowHeight: CGFloat, duration: TimeInterval, delayFactor: Double) -> Animation {
+        return { cell, indexPath, tableView in
+            cell.transform = CGAffineTransform(translationX: 0, y: rowHeight)
+
+            UIView.animate(
+                withDuration: duration,
+                delay: delayFactor * Double(indexPath.row),
+                usingSpringWithDamping: 0.4,
+                initialSpringVelocity: 0.1,
+                options: [.curveEaseInOut],
+                animations: {
+                    cell.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+        }
+    }
+    }
     @IBOutlet weak var toolBar: UIToolbar! //Тулбар с кнопкой добавления задачи
     @IBOutlet weak var navBar: UINavigationItem! //Заголовок
     @IBOutlet weak var addButtonItem: UIBarButtonItem! //Кнопка +
@@ -93,8 +140,9 @@ class MainViewTableViewController: UITableViewController {
     
     
     
+   
     let userDefults = UserDefaults.standard
-    
+    var animationSelector = 1
     
     func saveTasks(tasks:Array<Any>) { //Сохранение массива задач
         UserDefaults.standard.set(Public.tasks, forKey: "tasksKey")
@@ -110,7 +158,7 @@ class MainViewTableViewController: UITableViewController {
                 
                 return UserDefaults.standard.array(forKey:"tasksKey")!
             } else {
-                return [""]
+                return ["² 🤓"]
             }
             
         }
@@ -125,18 +173,51 @@ class MainViewTableViewController: UITableViewController {
     }
     
     
-    
+   
     @IBAction func showAddTask(_ sender: Any) {
+       
+        
+        let alert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        
+       
+        
+        
+        alert.view.layer.bounds = CGRect(x: 0, y: 0, width: 10, height: 10)
+        alert.view.tintColor = .systemRed
+        
+
+        alert.addTextField { (textField) in
+            textField.text = "² "
+            textField.borderStyle = .none
+            textField.backgroundColor = .systemBackground
+        }
+
+       
+        alert.addAction(UIAlertAction(title: "+", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            
+            Public.tasks.append((alert?.textFields![0].text!)!)
+            
+            self.animationSelector = 1
+            self.tableView.reloadData()
+            
+            
+            
+        }))
+
+       
+        self.present(alert, animated: true, completion: nil)
         
         self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
         NSUbiquitousKeyValueStore.default.synchronize()
-        
+        self.animationSelector = 0
         self.totalTasks.title = ""
     }
     
     @IBAction func sortTasks(_ sender: Any) {
         
         Public.tasks.sort(by: >)
+        self.animationSelector = 2
         self.tableView.reloadData()
         self.saveTasks(tasks: Public.tasks)
         NSUbiquitousKeyValueStore.default.synchronize()
@@ -148,7 +229,8 @@ class MainViewTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true //большой красивый заголовк
+        
+    self.navigationController?.navigationBar.prefersLargeTitles = true //большой красивый заголовк
         //navigationItem.hidesBackButton = true //Отключение кнопки Назад
        
         NSUbiquitousKeyValueStore.default.synchronize()
@@ -168,13 +250,26 @@ class MainViewTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         
         return Public.tasks.count
-        
+       
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) //Создание ячеки и привязка по индентификатору к StoryBoard
+        switch animationSelector {
+        case 1:
+            let animation1 = AnimationFactory.makeMoveUpWithBounce(rowHeight: cell.frame.height/9, duration: 1.0, delayFactor: 0.05)
+            let animator = Animator(animation: animation1)
+            animator.animate(cell: cell, at: indexPath, in: tableView)
+        case 2:
+            let animation = AnimationFactory.makeFadeAnimation(duration: 0.5, delayFactor: 0.05)
+            let animator = Animator(animation: animation)
+            animator.animate(cell: cell, at: indexPath, in: tableView)
+        default:
+            print("No animation")
+            
+        }
         let task = Public.tasks[indexPath.row] //Новый элемент массива
         
         cell.textLabel?.text = task
@@ -247,7 +342,7 @@ class MainViewTableViewController: UITableViewController {
             self.tableView.cellForRow(at: index)?.textLabel!.font = UIFont.boldSystemFont(ofSize: 18.0) //Изменение шрифта задачи
             self.saveTasks(tasks: Public.tasks)
         }
-        action.backgroundColor = UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
+        action.backgroundColor = .systemRed//UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
         
         return action
     }
@@ -262,7 +357,7 @@ class MainViewTableViewController: UITableViewController {
             self.saveDoneCounter(tasks: Public.doneTasksCouner)
             self.saveTasks(tasks: Public.tasks)
         }
-        action.backgroundColor = .red
+        action.backgroundColor = .systemRed
         
         return action
     }
@@ -286,8 +381,7 @@ class MainViewTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let addVC = segue.destination as! AddTaskViewController //Ссылка на экран добавления задачи
-        addVC.mainVC = self
+       
     }
     
     

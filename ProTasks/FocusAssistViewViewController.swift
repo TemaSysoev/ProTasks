@@ -25,29 +25,28 @@ class FocusAssistViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        taskName = addTaskVC.nameTextField.text!
-        nameLabel.text = taskName
-        timeLabel.text = "\(time) mins left"
-        timeProgress.progress = (25-Float(time))/25
-        timer = Timer.scheduledTimer(timeInterval: 60, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+        taskName = Public.tasks[0]
         
+        timeLabel.text = " \(taskName): \(time) mins left"
+        timeProgress.progress = (25-Float(time))/25
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+        timeProgress.layer.cornerRadius = 20
         
     }
     @objc func updateTimer(){
         time -= 1
-        timeLabel.text = "\(time) mins left"
+        timeLabel.text = " \(taskName): \(time) mins left"
         timeProgress.progress = (25-Float(time))/25
-        if (time == 0) && (nameLabel.text != "Break time!") {
+       /* if (time == 0) && (nameLabel.text != "Break time!") {
             AudioServicesPlayAlertSound(SystemSoundID(1005))
             time = 5
             timeLabel.text = "\(time) mins left"
-            nameLabel.text = "Break time!"
-        }
-        if (time == 0) && (nameLabel.text == "Break time!") {
+           
+        }*/
+        if (time == 0)  {
             AudioServicesPlayAlertSound(SystemSoundID(1005))
-            time = 25
-            timeLabel.text = "\(time) mins left"
-            nameLabel.text = taskName
+            dismiss(animated: true)
+          
         }
     }
     
