@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E0096A132301C07800DDF2E9 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = E0096A122301C07800DDF2E9 /* AppIcon.appiconset */; };
+		E0096A172301FBA800DDF2E9 /* iOS in Resources */ = {isa = PBXBuildFile; fileRef = E0096A162301FBA800DDF2E9 /* iOS */; };
 		E065F43922ABCEB000A6E743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F43822ABCEB000A6E743 /* AppDelegate.swift */; };
 		E065F43B22ABCEB000A6E743 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F43A22ABCEB000A6E743 /* SceneDelegate.swift */; };
 		E065F44022ABCEB000A6E743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E065F43E22ABCEB000A6E743 /* Main.storyboard */; };
@@ -19,6 +19,7 @@
 		E065F46C22ABD09100A6E743 /* MainViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F46B22ABD09100A6E743 /* MainViewControllerTableView.swift */; };
 		E065F46E22ABD0C900A6E743 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065F46D22ABD0C900A6E743 /* AddViewController.swift */; };
 		E065F47222ABD12100A6E743 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E065F47122ABD12100A6E743 /* CloudKit.framework */; };
+		E078424C2304158B00DE7CCC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078424B2304158B00DE7CCC /* SettingsViewController.swift */; };
 		E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */; };
 		E0F07BCC22FF40E900FBFEC5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F07BCB22FF40E900FBFEC5 /* GameKit.framework */; };
 /* End PBXBuildFile section */
@@ -40,8 +41,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E0096A3F2302C18700DDF2E9 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		E0096A122301C07800DDF2E9 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppIcon.appiconset; path = iOS/AppIcon.appiconset; sourceTree = SOURCE_ROOT; };
+		E0096A162301FBA800DDF2E9 /* iOS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOS; sourceTree = SOURCE_ROOT; };
+		E0096A1D2302C18400DDF2E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		E0096A1F2302C18600DDF2E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E0096A212302C18600DDF2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0096A2B2302C18600DDF2E9 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		E0096A2D2302C18600DDF2E9 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		E0096A2F2302C18600DDF2E9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		E0096A312302C18700DDF2E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E0096A332302C18700DDF2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0096A342302C18700DDF2E9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		E065F43522ABCEB000A6E743 /* ProTasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProTasks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E065F43822ABCEB000A6E743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E065F43A22ABCEB000A6E743 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +83,7 @@
 		E065F46D22ABD0C900A6E743 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		E065F46F22ABD11C00A6E743 /* ProTasks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProTasks.entitlements; sourceTree = "<group>"; };
 		E065F47122ABD12100A6E743 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E078424B2304158B00DE7CCC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusAssistViewViewController.swift; sourceTree = "<group>"; };
 		E0F07BCB22FF40E900FBFEC5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -91,12 +115,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0096A1B2302C18400DDF2E9 /* ProTasksWatch */ = {
+			isa = PBXGroup;
+			children = (
+				E0096A1C2302C18400DDF2E9 /* Interface.storyboard */,
+				E0096A1F2302C18600DDF2E9 /* Assets.xcassets */,
+				E0096A212302C18600DDF2E9 /* Info.plist */,
+			);
+			path = ProTasksWatch;
+			sourceTree = "<group>";
+		};
+		E0096A2A2302C18600DDF2E9 /* ProTasksWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E0096A2B2302C18600DDF2E9 /* InterfaceController.swift */,
+				E0096A2D2302C18600DDF2E9 /* ExtensionDelegate.swift */,
+				E0096A2F2302C18600DDF2E9 /* NotificationController.swift */,
+				E0096A312302C18700DDF2E9 /* Assets.xcassets */,
+				E0096A332302C18700DDF2E9 /* Info.plist */,
+				E0096A342302C18700DDF2E9 /* PushNotificationPayload.apns */,
+			);
+			path = "ProTasksWatch Extension";
+			sourceTree = "<group>";
+		};
 		E065F42C22ABCEB000A6E743 = {
 			isa = PBXGroup;
 			children = (
 				E065F43722ABCEB000A6E743 /* ProTasks */,
 				E065F45122ABCEB800A6E743 /* ProTasksTests */,
 				E065F45C22ABCEB800A6E743 /* ProTasksUITests */,
+				E0096A1B2302C18400DDF2E9 /* ProTasksWatch */,
+				E0096A2A2302C18600DDF2E9 /* ProTasksWatch Extension */,
 				E065F43622ABCEB000A6E743 /* Products */,
 				E065F47022ABD12100A6E743 /* Frameworks */,
 			);
@@ -120,9 +169,10 @@
 				E065F43A22ABCEB000A6E743 /* SceneDelegate.swift */,
 				E065F46B22ABD09100A6E743 /* MainViewControllerTableView.swift */,
 				E065F46D22ABD0C900A6E743 /* AddViewController.swift */,
+				E078424B2304158B00DE7CCC /* SettingsViewController.swift */,
 				E065F43E22ABCEB000A6E743 /* Main.storyboard */,
 				E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */,
-				E0096A122301C07800DDF2E9 /* AppIcon.appiconset */,
+				E0096A162301FBA800DDF2E9 /* iOS */,
 				E065F44422ABCEB800A6E743 /* Assets.xcassets */,
 				E065F44622ABCEB800A6E743 /* LaunchScreen.storyboard */,
 				E065F44922ABCEB800A6E743 /* Info.plist */,
@@ -168,6 +218,7 @@
 				E065F43122ABCEB000A6E743 /* Sources */,
 				E065F43222ABCEB000A6E743 /* Frameworks */,
 				E065F43322ABCEB000A6E743 /* Resources */,
+				E0096A3F2302C18700DDF2E9 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -262,9 +313,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0096A132301C07800DDF2E9 /* AppIcon.appiconset in Resources */,
 				E065F44822ABCEB800A6E743 /* LaunchScreen.storyboard in Resources */,
 				E065F44522ABCEB800A6E743 /* Assets.xcassets in Resources */,
+				E0096A172301FBA800DDF2E9 /* iOS in Resources */,
 				E065F44022ABCEB000A6E743 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +343,7 @@
 			files = (
 				E065F44322ABCEB000A6E743 /* ProTasks.xcdatamodeld in Sources */,
 				E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */,
+				E078424C2304158B00DE7CCC /* SettingsViewController.swift in Sources */,
 				E065F46E22ABD0C900A6E743 /* AddViewController.swift in Sources */,
 				E065F46C22ABD09100A6E743 /* MainViewControllerTableView.swift in Sources */,
 				E065F43922ABCEB000A6E743 /* AppDelegate.swift in Sources */,
@@ -331,6 +383,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E0096A1C2302C18400DDF2E9 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E0096A1D2302C18400DDF2E9 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		E065F43E22ABCEB000A6E743 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -476,6 +536,7 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = K52EJNPD2V;
 				INFOPLIST_FILE = ProTasks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,6 +566,7 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = K52EJNPD2V;
 				INFOPLIST_FILE = ProTasks/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

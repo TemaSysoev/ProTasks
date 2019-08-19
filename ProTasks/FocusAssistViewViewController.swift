@@ -27,7 +27,10 @@ class FocusAssistViewViewController: UIViewController {
         super.viewDidLoad()
         taskName = Public.tasks[0]
         
-        timeLabel.text = " \(taskName): \(time) mins left"
+        timeLabel.text = """
+        \(taskName):
+        \(time) mins left
+        """
         timeProgress.progress = (25-Float(time))/25
         timer = Timer.scheduledTimer(timeInterval: 2, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
         timeProgress.layer.cornerRadius = 20
@@ -35,7 +38,10 @@ class FocusAssistViewViewController: UIViewController {
     }
     @objc func updateTimer(){
         time -= 1
-        timeLabel.text = " \(taskName): \(time) mins left"
+        timeLabel.text = """
+        \(taskName):
+        \(time) mins left
+        """
         timeProgress.progress = (25-Float(time))/25
        /* if (time == 0) && (nameLabel.text != "Break time!") {
             AudioServicesPlayAlertSound(SystemSoundID(1005))

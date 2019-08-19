@@ -87,10 +87,7 @@ final class Animator {
         guard !hasAnimatedAllCells else {
             return
         }
-
         animation(cell, indexPath, tableView)
-
-       // hasAnimatedAllCells = tableView.isLastVisibleCell(at: indexPath)
     }
 }
 
@@ -128,7 +125,7 @@ class MainViewTableViewController: UITableViewController {
         }
     }
     }
-    @IBOutlet weak var toolBar: UIToolbar! //Тулбар с кнопкой добавления задачи
+    
     @IBOutlet weak var navBar: UINavigationItem! //Заголовок
     @IBOutlet weak var addButtonItem: UIBarButtonItem! //Кнопка +
     @IBOutlet weak var sortButton: UIBarButtonItem!
@@ -143,7 +140,13 @@ class MainViewTableViewController: UITableViewController {
    
     let userDefults = UserDefaults.standard
     var animationSelector = 1
-    
+    func updateTasks(_ tasks: [String], _ counter: Int) -> [String] {
+        
+        var sTasks = tasks
+        
+        tableView.dataSource = sTasks as? UITableViewDataSource
+        
+    }
     func saveTasks(tasks:Array<Any>) { //Сохранение массива задач
         UserDefaults.standard.set(Public.tasks, forKey: "tasksKey")
         NSUbiquitousKeyValueStore.default.set(Public.tasks, forKey: "tasksKey")
@@ -165,49 +168,29 @@ class MainViewTableViewController: UITableViewController {
         
     }
     
-    func saveDoneCounter(tasks:Int) {
-        NSUbiquitousKeyValueStore.default.set(Public.doneTasksCouner, forKey: "tasksCounter")
-    }
-    func loadDoneCounter() -> Int {
-        return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
-    }
-    
     
    
     @IBAction func showAddTask(_ sender: Any) {
-       
-        
         let alert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
-        
-       
-        
-        
         alert.view.layer.bounds = CGRect(x: 0, y: 0, width: 10, height: 10)
-        alert.view.tintColor = .systemRed
-        
-
+        alert.view.tintColor = UIColor(named: "ProTasksC")
         alert.addTextField { (textField) in
             textField.text = "² "
             textField.borderStyle = .none
             textField.backgroundColor = .systemBackground
+            
         }
-
-       
         alert.addAction(UIAlertAction(title: "+", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0]
-            
-            Public.tasks.append((alert?.textFields![0].text!)!)
-            
+            if alert?.textFields![0].text != "² " {
+                Public.tasks.append((alert?.textFields![0].text!)!)
+            }
             self.animationSelector = 1
             self.tableView.reloadData()
             
             
             
         }))
-
-       
         self.present(alert, animated: true, completion: nil)
-        
         self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
         NSUbiquitousKeyValueStore.default.synchronize()
         self.animationSelector = 0
@@ -215,7 +198,6 @@ class MainViewTableViewController: UITableViewController {
     }
     
     @IBAction func sortTasks(_ sender: Any) {
-        
         Public.tasks.sort(by: >)
         self.animationSelector = 2
         self.tableView.reloadData()
@@ -223,19 +205,20 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.synchronize()
         self.totalTasks.title = ""
     }
-    
-    
-    
+// MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-    self.navigationController?.navigationBar.prefersLargeTitles = true //большой красивый заголовк
-        //navigationItem.hidesBackButton = true //Отключение кнопки Назад
-       
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "ProTasksC")
+        self.navigationController?.toolbar.tintColor = UIColor(named: "ProTasksC")
         NSUbiquitousKeyValueStore.default.synchronize()
         Public.tasks = loadTasks() as! [String] //Загрузка списка задач
-        Public.doneTasksCouner = loadDoneCounter()
+        
+        
+       
+        print(Public.doneTasksCouner)
         self.totalTasks.title = ""
         tableView.dataSource = self
         tableView.delegate = self
@@ -342,7 +325,7 @@ class MainViewTableViewController: UITableViewController {
             self.tableView.cellForRow(at: index)?.textLabel!.font = UIFont.boldSystemFont(ofSize: 18.0) //Изменение шрифта задачи
             self.saveTasks(tasks: Public.tasks)
         }
-        action.backgroundColor = .systemRed//UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
+        action.backgroundColor =  UIColor(named: "ProTasksColor")//UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
         
         return action
     }
@@ -353,11 +336,12 @@ class MainViewTableViewController: UITableViewController {
             NSUbiquitousKeyValueStore.default.synchronize()
             self.tableView.reloadData()
             Public.doneTasksCouner += 1
+            print(Public.doneTasksCouner)
             self.totalTasks.title = "\(Public.doneTasksCouner)"
             self.saveDoneCounter(tasks: Public.doneTasksCouner)
             self.saveTasks(tasks: Public.tasks)
         }
-        action.backgroundColor = .systemRed
+        action.backgroundColor = UIColor(named: "ProTasksColor")
         
         return action
     }
