@@ -15,9 +15,9 @@
             timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "doneAction(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,39 +58,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8D495301-4454-4D45-8CCC-EEADC27985C6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProTasks/MainViewControllerTableView.swift"
-            timestampString = "0"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "loadTasks()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5DE2084C-111B-4B2E-B0D7-0B5EC1B88320"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProTasks/SettingsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "loadDoneCounter()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "AF9E99DE-B6A2-49D7-B906-8D4C42278F71"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -98,9 +65,9 @@
             filePath = "ProTasks/MainViewControllerTableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "doneAction(at:)"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
+            landmarkName = "pushUpAction(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

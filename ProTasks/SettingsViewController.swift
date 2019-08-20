@@ -18,7 +18,8 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
          
     var score = 0
          
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var leaderboardButton: UIButton!
+   
     
     let LEADERBOARD_ID = "com.score.professionalsProTasks"
     func authenticateLocalPlayer() {
@@ -56,7 +57,7 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
     @IBAction func addScoreAndSubmitToGC(_ sender: AnyObject) {
         // Add 10 points to current score
         score = Public.doneTasksCouner
-        scoreLabel.text = "\(score)"
+        
      
         // Submit score to GC leaderboard
         let bestScoreInt = GKScore(leaderboardIdentifier: LEADERBOARD_ID)
@@ -71,37 +72,65 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
     }
     
     
-    func saveDoneCounter(tasks:Int) {
-        UserDefaults.standard.set(Public.tasks, forKey: "tasksCounter")
-       // NSUbiquitousKeyValueStore.default.set(Public.doneTasksCouner, forKey: "tasksCounter")
+    
+    func saveAndSync(tasks:Array<Any>) { //Сохранение массива задач
+        var syncTasks: [Any] = Public.tasks
+        syncTasks.append(Public.doneTasksCouner)
+        UserDefaults.standard.set(syncTasks, forKey: "Key")
+        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "Key")
         
     }
-    func loadDoneCounter() -> Int {
-        /*return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))*/
-        //if NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter") != 0 {
-            //return UserDefaults.standard.array(forKey:"tasksKey")!
-           // return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
-        //} else {
-          //  if UserDefaults.standard.double(forKey:"tasksCounter") != 0 {
+    func loadTasks() -> [String]{
+        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            let total = (syncedTasks?.count)!
+            syncedTasks?.remove(at: total - 1)
+            return syncedTasks as! [String]
+        } else {
+            if UserDefaults.standard.array(forKey: "Key") != nil {
+                var syncedTasksE = UserDefaults.standard.array(forKey: "Key")
+                let total = (syncedTasksE?.count)!
+                syncedTasksE?.remove(at: total - 1)
                 
-                return Int(UserDefaults.standard.double(forKey:"tasksCounter"))
-            //} else {
-              //  return 0
-           // }
-            
-        //}
+                return syncedTasksE as! [String]
+            } else {
+                return ["² Welcome!"]
+            }
+        }
     }
-    
+    func loadTasksCounter() -> Int{
+        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            let total = syncedTasks?.count
+            let counter: Int = (syncedTasks![total! - 1] as! Int)
+            return counter
+        } else {
+            if UserDefaults.standard.array(forKey: "Key") != nil {
+                let syncedTasks = UserDefaults.standard.array(forKey: "Key")
+                let total = syncedTasks?.count
+                
+                let counter: Int = (syncedTasks![total! - 1] as! Int)
+                return counter
+                
+                
+                
+            } else {
+                return 0
+            }
+        }
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         authenticateLocalPlayer()
-        Public.doneTasksCouner = loadDoneCounter()
-        
+        Public.doneTasksCouner = loadTasksCounter()
+        leaderboardButton.layer.cornerRadius = 6
         score = Public.doneTasksCouner
-        scoreLabel.text = "\(score)"
+       
+
+        
     }
     
 

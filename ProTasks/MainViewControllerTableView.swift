@@ -71,7 +71,7 @@ extension CKError {
 struct Public {
     static var tasks: [String] = [] //Массив задач
     static var newTaskPublic = String() //Новая задача
-    static var doneTasksCouner = 0
+    static var doneTasksCouner: Int = 0
 }
 
 typealias Animation = (UITableViewCell, IndexPath, UITableView) -> Void
@@ -140,33 +140,70 @@ class MainViewTableViewController: UITableViewController {
    
     let userDefults = UserDefaults.standard
     var animationSelector = 1
-    func updateTasks(_ tasks: [String], _ counter: Int) -> [String] {
-        
-        var sTasks = tasks
-        
-        tableView.dataSource = sTasks as? UITableViewDataSource
-        
-    }
-    func saveTasks(tasks:Array<Any>) { //Сохранение массива задач
-        UserDefaults.standard.set(Public.tasks, forKey: "tasksKey")
-        NSUbiquitousKeyValueStore.default.set(Public.tasks, forKey: "tasksKey")
+    
+   
+    func saveAndSync(tasks:Array<Any>) { //Сохранение массива задач
+        var syncTasks: [Any] = Public.tasks
+        syncTasks.append(Public.doneTasksCouner)
+        UserDefaults.standard.set(syncTasks, forKey: "Key")
+        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "Key")
         
     }
-    func loadTasks() -> Array<Any>{ //Чтение массива задач
-        if NSUbiquitousKeyValueStore.default.array(forKey: "tasksKey") != nil {
-            //return UserDefaults.standard.array(forKey:"tasksKey")!
-            return NSUbiquitousKeyValueStore.default.array(forKey: "tasksKey")!
+    func loadTasks() -> [String]{
+        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            let total = (syncedTasks?.count)!
+            syncedTasks?.remove(at: total - 1)
+            return syncedTasks as! [String]
         } else {
-            if UserDefaults.standard.array(forKey:"tasksKey") != nil {
+            if UserDefaults.standard.array(forKey: "Key") != nil {
+                var syncedTasksE = UserDefaults.standard.array(forKey: "Key")
+                let total = (syncedTasksE?.count)!
+                syncedTasksE?.remove(at: total - 1)
                 
-                return UserDefaults.standard.array(forKey:"tasksKey")!
+                return syncedTasksE as! [String]
             } else {
-                return ["² 🤓"]
+                return ["² Welcome!"]
             }
-            
         }
-        
     }
+    func loadTasksCounter() -> Int{
+        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            let total = syncedTasks?.count
+            let counter: Int = (syncedTasks![total! - 1] as! Int)
+            return counter
+        } else {
+            if UserDefaults.standard.array(forKey: "Key") != nil {
+                let syncedTasks = UserDefaults.standard.array(forKey: "Key")
+                let total = syncedTasks?.count
+                
+                let counter: Int = (syncedTasks![total! - 1] as! Int)
+                return counter
+                
+                
+                
+            } else {
+                return 0
+            }
+        }
+    }
+    
+    /*func loadDoneCounter() -> Int {
+        /*return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))*/
+        //if NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter") != 0 {
+            //return UserDefaults.standard.array(forKey:"Key")!
+           // return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
+        //} else {
+          //  if UserDefaults.standard.double(forKey:"tasksCounter") != 0 {
+                
+                return Int(UserDefaults.standard.double(forKey:"tasksCounter"))
+            //} else {
+              //  return 0
+           // }
+            
+        //}
+    }*/
     
     
    
@@ -191,7 +228,8 @@ class MainViewTableViewController: UITableViewController {
             
         }))
         self.present(alert, animated: true, completion: nil)
-        self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
+        //self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
+        self.saveAndSync(tasks: Public.tasks)
         NSUbiquitousKeyValueStore.default.synchronize()
         self.animationSelector = 0
         self.totalTasks.title = ""
@@ -201,7 +239,8 @@ class MainViewTableViewController: UITableViewController {
         Public.tasks.sort(by: >)
         self.animationSelector = 2
         self.tableView.reloadData()
-        self.saveTasks(tasks: Public.tasks)
+        //self.saveTasks(tasks: Public.tasks)
+        self.saveAndSync(tasks: Public.tasks)
         NSUbiquitousKeyValueStore.default.synchronize()
         self.totalTasks.title = ""
     }
@@ -214,9 +253,10 @@ class MainViewTableViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor(named: "ProTasksC")
         self.navigationController?.toolbar.tintColor = UIColor(named: "ProTasksC")
         NSUbiquitousKeyValueStore.default.synchronize()
-        Public.tasks = loadTasks() as! [String] //Загрузка списка задач
+        Public.tasks = loadTasks() //Загрузка списка задач
+        Public.doneTasksCouner = loadTasksCounter()
         
-        
+        self.saveAndSync(tasks: Public.tasks)
        
         print(Public.doneTasksCouner)
         self.totalTasks.title = ""
@@ -257,7 +297,10 @@ class MainViewTableViewController: UITableViewController {
         
         cell.textLabel?.text = task
         cell.selectionStyle = UITableViewCell.SelectionStyle.none //отключения выбора ячейки
-        saveTasks(tasks: Public.tasks)
+        
+        //saveTasks(tasks: Public.tasks)
+        self.saveAndSync(tasks: Public.tasks)
+        NSUbiquitousKeyValueStore.default.synchronize()
         return cell
     }
     
@@ -288,7 +331,7 @@ class MainViewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //Свайп влево для Завершения
         let done = doneAction(at: indexPath)
-        userDefults.set(Public.tasks, forKey: "TasksKey")
+        userDefults.set(Public.tasks, forKey: "Key")
         userDefults.synchronize()
         self.totalTasks.title = "\(Public.doneTasksCouner)"
         return UISwipeActionsConfiguration(actions: [done])
@@ -323,7 +366,9 @@ class MainViewTableViewController: UITableViewController {
             
             self.tableView.reloadData()
             self.tableView.cellForRow(at: index)?.textLabel!.font = UIFont.boldSystemFont(ofSize: 18.0) //Изменение шрифта задачи
-            self.saveTasks(tasks: Public.tasks)
+            //self.saveTasks(tasks: Public.tasks)
+            self.saveAndSync(tasks: Public.tasks)
+            NSUbiquitousKeyValueStore.default.synchronize()
         }
         action.backgroundColor =  UIColor(named: "ProTasksColor")//UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)//Задание цвета свайпа
         
@@ -338,8 +383,10 @@ class MainViewTableViewController: UITableViewController {
             Public.doneTasksCouner += 1
             print(Public.doneTasksCouner)
             self.totalTasks.title = "\(Public.doneTasksCouner)"
-            self.saveDoneCounter(tasks: Public.doneTasksCouner)
-            self.saveTasks(tasks: Public.tasks)
+            //self.saveDoneCounter(tasks: Public.doneTasksCouner)
+            //self.saveTasks(tasks: Public.tasks)
+            self.saveAndSync(tasks: Public.tasks)
+            NSUbiquitousKeyValueStore.default.synchronize()
         }
         action.backgroundColor = UIColor(named: "ProTasksColor")
         

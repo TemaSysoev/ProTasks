@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oo3-xD-Pbs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oo3-xD-Pbs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="N4N-TR-Xlq">
                         <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="Y5L-Hi-9RO" kind="relationship" relationship="rootViewController" id="MdC-Um-27M"/>
@@ -156,29 +156,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBC-hB-4WV">
-                                <rect key="frame" x="120" y="106" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBC-hB-4WV">
+                                <rect key="frame" x="20" y="102" width="374" height="50"/>
+                                <color key="backgroundColor" name="ProTasksColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="rai-Aj-UpT"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <state key="normal" title="Leaderboard" image="arrow.up.right.square.fill" catalog="system">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
                                 <connections>
                                     <action selector="addScoreAndSubmitToGC:" destination="Oh5-gd-avH" eventType="touchUpInside" id="K1c-2v-Bkm"/>
                                     <action selector="checkGCLeaderboard:" destination="Oh5-gd-avH" eventType="touchUpInside" id="j4J-tt-9og"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNJ-1o-19Y">
-                                <rect key="frame" x="98" y="222" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="D3D-zK-g9e" firstAttribute="trailing" secondItem="wBC-hB-4WV" secondAttribute="trailing" constant="20" id="4Ux-fb-Gpg"/>
+                            <constraint firstItem="wBC-hB-4WV" firstAttribute="top" secondItem="D3D-zK-g9e" secondAttribute="top" constant="102" id="5KE-yS-L8s"/>
+                            <constraint firstItem="wBC-hB-4WV" firstAttribute="leading" secondItem="D3D-zK-g9e" secondAttribute="leading" constant="20" id="TbP-lJ-MOb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="D3D-zK-g9e"/>
                     </view>
                     <connections>
-                        <outlet property="scoreLabel" destination="JNJ-1o-19Y" id="bbJ-mn-Fgh"/>
+                        <outlet property="leaderboardButton" destination="wBC-hB-4WV" id="EC8-RO-Mg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn5-FR-ra9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -187,6 +191,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.up.right.square.fill" catalog="system" width="64" height="56"/>
         <image name="gear" catalog="system" width="64" height="60"/>
         <image name="line.horizontal.3.decrease.circle.fill" catalog="system" width="64" height="62"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="62"/>
