@@ -15,8 +15,8 @@
             timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "pushUpAction(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,9 +32,9 @@
             timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "saveAndSync(tasks:)"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "loadTasks()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -49,8 +49,8 @@
             timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "loadTasks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -65,9 +65,9 @@
             filePath = "ProTasks/MainViewControllerTableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "pushUpAction(at:)"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "tableView(_:leadingSwipeActionsConfigurationForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -81,8 +81,8 @@
             filePath = "ProTasks/MainViewControllerTableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "cloudSync(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -97,10 +97,10 @@
             filePath = "ProTasks/MainViewControllerTableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "MainViewTableViewController"
-            landmarkType = "3">
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "cloudSync(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

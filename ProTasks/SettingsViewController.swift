@@ -76,19 +76,19 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
     func saveAndSync(tasks:Array<Any>) { //Сохранение массива задач
         var syncTasks: [Any] = Public.tasks
         syncTasks.append(Public.doneTasksCouner)
-        UserDefaults.standard.set(syncTasks, forKey: "Key")
-        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "Key")
+        UserDefaults.standard.set(syncTasks, forKey: "TestKey1")
+        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "TestKey1")
         
     }
     func loadTasks() -> [String]{
-        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
-            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+        if NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1") != nil {
+            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1")
             let total = (syncedTasks?.count)!
             syncedTasks?.remove(at: total - 1)
             return syncedTasks as! [String]
         } else {
-            if UserDefaults.standard.array(forKey: "Key") != nil {
-                var syncedTasksE = UserDefaults.standard.array(forKey: "Key")
+            if UserDefaults.standard.array(forKey: "TestKey1") != nil {
+                var syncedTasksE = UserDefaults.standard.array(forKey: "TestKey1")
                 let total = (syncedTasksE?.count)!
                 syncedTasksE?.remove(at: total - 1)
                 
@@ -99,14 +99,14 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
         }
     }
     func loadTasksCounter() -> Int{
-        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
-            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+        if NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1") != nil {
+            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1")
             let total = syncedTasks?.count
             let counter: Int = (syncedTasks![total! - 1] as! Int)
             return counter
         } else {
-            if UserDefaults.standard.array(forKey: "Key") != nil {
-                let syncedTasks = UserDefaults.standard.array(forKey: "Key")
+            if UserDefaults.standard.array(forKey: "TestKey1") != nil {
+                let syncedTasks = UserDefaults.standard.array(forKey: "TestKey1")
                 let total = syncedTasks?.count
                 
                 let counter: Int = (syncedTasks![total! - 1] as! Int)

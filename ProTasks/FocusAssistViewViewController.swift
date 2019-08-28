@@ -13,7 +13,7 @@ class FocusAssistViewViewController: UIViewController {
     
     var addTaskVC = AddTaskViewController()
     
-    var time = 25
+    var time = 45
     var timer = Timer()
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -37,7 +37,7 @@ class FocusAssistViewViewController: UIViewController {
         \(taskName):
         \(time) mins left
         """
-        timeProgress.progress = (25-Float(time))/25
+        timeProgress.progress = (45-Float(time))/45
         timer = Timer.scheduledTimer(timeInterval: 60, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
         timeProgress.layer.cornerRadius = 20
         
@@ -48,7 +48,7 @@ class FocusAssistViewViewController: UIViewController {
         \(taskName):
         \(time) mins left
         """
-        timeProgress.progress = (25-Float(time))/25
+        timeProgress.progress = (45-Float(time))/45
        
         if (time == 0)  {
             if cancel{

@@ -22,6 +22,7 @@
 		E065F47222ABD12100A6E743 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E065F47122ABD12100A6E743 /* CloudKit.framework */; };
 		E078424C2304158B00DE7CCC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078424B2304158B00DE7CCC /* SettingsViewController.swift */; };
 		E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */; };
+		E0CD3BA42316FCEB00E9DC5B /* MergeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD3BA32316FCEB00E9DC5B /* MergeViewController.swift */; };
 		E0F07BCC22FF40E900FBFEC5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F07BCB22FF40E900FBFEC5 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		E065F47122ABD12100A6E743 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E078424B2304158B00DE7CCC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusAssistViewViewController.swift; sourceTree = "<group>"; };
+		E0CD3BA32316FCEB00E9DC5B /* MergeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeViewController.swift; sourceTree = "<group>"; };
 		E0F07BCB22FF40E900FBFEC5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 				E065F46D22ABD0C900A6E743 /* AddViewController.swift */,
 				E078424B2304158B00DE7CCC /* SettingsViewController.swift */,
 				E065F43E22ABCEB000A6E743 /* Main.storyboard */,
+				E0CD3BA32316FCEB00E9DC5B /* MergeViewController.swift */,
 				E092750322F46DF0007D985F /* FocusAssistViewViewController.swift */,
 				E0523D93230D7BBF00F5B90A /* Untitled 2.png */,
 				E0096A162301FBA800DDF2E9 /* iOS */,
@@ -348,6 +351,7 @@
 				E065F44322ABCEB000A6E743 /* ProTasks.xcdatamodeld in Sources */,
 				E092750422F46DF0007D985F /* FocusAssistViewViewController.swift in Sources */,
 				E078424C2304158B00DE7CCC /* SettingsViewController.swift in Sources */,
+				E0CD3BA42316FCEB00E9DC5B /* MergeViewController.swift in Sources */,
 				E065F46E22ABD0C900A6E743 /* AddViewController.swift in Sources */,
 				E065F46C22ABD09100A6E743 /* MainViewControllerTableView.swift in Sources */,
 				E065F43922ABCEB000A6E743 /* AppDelegate.swift in Sources */,

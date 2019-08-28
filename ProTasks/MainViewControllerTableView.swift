@@ -72,8 +72,7 @@ struct Public {
     static var tasks: [String] = [] //Массив задач
     static var newTaskPublic = String() //Новая задача
     static var doneTasksCouner: Int = 0
-    static var hotTasksEnabled = false
-    static var hotTasksMax = 5
+    static var localBackup: [String] = []
 }
 
 typealias Animation = (UITableViewCell, IndexPath, UITableView) -> Void
@@ -134,7 +133,7 @@ class MainViewTableViewController: UITableViewController {
     @IBOutlet weak var totalTasks: UIBarButtonItem!
     @IBOutlet weak var cloudButton: UIBarButtonItem!
     
-    @IBOutlet weak var moreButton: UIBarButtonItem!
+    @IBOutlet weak var saveMergeButton: UIBarButtonItem!
     
     @IBOutlet weak var bugButton: UIButton!
     
@@ -148,23 +147,25 @@ class MainViewTableViewController: UITableViewController {
     func saveAndSync(tasks:Array<Any>) { //Сохранение массива задач
         var syncTasks: [Any] = Public.tasks
         syncTasks.append(Public.doneTasksCouner)
-        UserDefaults.standard.set(syncTasks, forKey: "Key")
-        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "Key")
-        
+        UserDefaults.standard.set(syncTasks, forKey: "TestKey1")
+        NSUbiquitousKeyValueStore.default.set(syncTasks, forKey: "TestKey1")
+        Public.localBackup += Public.tasks
+        for i in 0...(Public.localBackup.count - 1){
+            var element = Public.localBackup[i]
+            element = "#" + element
+        }
+        UserDefaults.standard.set(Public.localBackup, forKey: "BackUp")
     }
     func loadTasks() -> [String]{
-       /* if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+        if NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1") != nil {
             
-            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1")
             let total = (syncedTasks?.count)!
             syncedTasks?.remove(at: total - 1)
-            for i in syncedTasks?.count {
-                if syncedTasks[i] !=
-            }
             return syncedTasks as! [String]
         } else {
-            if UserDefaults.standard.array(forKey: "Key") != nil {
-                var syncedTasksE = UserDefaults.standard.array(forKey: "Key")
+            if UserDefaults.standard.array(forKey: "TestKey1") != nil {
+                var syncedTasksE = UserDefaults.standard.array(forKey: "TestKey1")
                 let total = (syncedTasksE?.count)!
                 syncedTasksE?.remove(at: total - 1)
                 
@@ -172,44 +173,20 @@ class MainViewTableViewController: UITableViewController {
             } else {
                 return ["² Welcome!"]
             }
-        }*/
-        if UserDefaults.standard.array(forKey: "Key") != nil {
-            var loadedTasks = UserDefaults.standard.array(forKey: "Key")
-            let loadedTotal = (loadedTasks?.count)!
-            loadedTasks?.remove(at: loadedTotal - 1)
-            
-            
-            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
-            let syncedTotal = (syncedTasks?.count)!
-            syncedTasks?.remove(at: syncedTotal - 1)
-            
-            let mergeCounter = syncedTotal - loadedTotal
-            
-            switch mergeCounter {
-            case 0:
-                for i in loadedTasks {
-                    if loadedTasks[i] != syncedTasks[i]
-                }
-            default:
-                <#code#>
-            }
-           
-    
-        } else {
-            return ["² Welcome!"]
         }
+        
         
         
     }
     func loadTasksCounter() -> Int{
-        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
-            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+        if NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1") != nil {
+            let syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "TestKey1")
             let total = syncedTasks?.count
             let counter: Int = (syncedTasks![total! - 1] as! Int)
             return counter
         } else {
-            if UserDefaults.standard.array(forKey: "Key") != nil {
-                let syncedTasks = UserDefaults.standard.array(forKey: "Key")
+            if UserDefaults.standard.array(forKey: "TestKey1") != nil {
+                let syncedTasks = UserDefaults.standard.array(forKey: "TestKey1")
                 let total = syncedTasks?.count
                 
                 let counter: Int = (syncedTasks![total! - 1] as! Int)
@@ -220,18 +197,16 @@ class MainViewTableViewController: UITableViewController {
             }
         }
     }
-    func saveHT(enable: Bool, max: Int) {
-        UserDefaults.standard.set(enable, forKey: "HotEnable")
-        UserDefaults.standard.set(max, forKey: "HotMax")
-        
-    }
-    func loadHTEnabled() -> Bool {
-        return UserDefaults.standard.bool(forKey: "HotEnable")
+    
+    func loadBackUp() -> [String] {
+        if UserDefaults.standard.array(forKey: "BackUp") != nil{
+            return UserDefaults.standard.array(forKey: "BackUp")! as! [String]}
+        else {
+            return [""]
+        }
     }
     
-    func loadHTMax() -> Int {
-        return UserDefaults.standard.integer(forKey: "HotMxx")
-    }
+    
     
    
     @IBAction func showAddTask(_ sender: Any) {
@@ -268,6 +243,31 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.synchronize()
         self.totalTasks.title = ""
     }
+    
+    @IBAction func mergeMode(_ sender: Any) {
+        saveMergeButton.title = "Save"
+        Public.tasks += loadBackUp()
+        tableView.reloadData()
+    }
+    
+    @IBAction func endMerge(_ sender: Any) {
+        saveMergeButton.title = ""
+        
+       
+        for i in 0...(Public.tasks.count - 1){
+            print("Total" + "\(Public.tasks.count)")
+            print("\(i)  \(Public.tasks[i])" )
+            var task = Array(Public.tasks[i])
+            if task[0] == "#"{
+                Public.tasks.remove(at: i)
+            }
+        }
+        saveAndSync(tasks: Public.tasks)
+        tableView.reloadData()
+    }
+    
+    
+    
     @IBAction func cloudSync(_ sender: Any) {
         saveAndSync(tasks: Public.tasks)
         if NSUbiquitousKeyValueStore.init().synchronize() {
@@ -288,8 +288,7 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.synchronize()
         Public.tasks = loadTasks() //Загрузка списка задач
         Public.doneTasksCouner = loadTasksCounter()
-        Public.hotTasksEnabled = loadHTEnabled()
-        Public.hotTasksMax = loadHTMax()
+        Public.localBackup = loadBackUp()
         
         
         self.saveAndSync(tasks: Public.tasks)
@@ -367,7 +366,7 @@ class MainViewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //Свайп влево для Завершения
         let done = doneAction(at: indexPath)
-        userDefults.set(Public.tasks, forKey: "Key")
+        userDefults.set(Public.tasks, forKey: "TestKey1")
         userDefults.synchronize()
         self.totalTasks.title = "\(Public.doneTasksCouner)"
         return UISwipeActionsConfiguration(actions: [done])
@@ -387,7 +386,9 @@ class MainViewTableViewController: UITableViewController {
             Public.tasks.insert(movingElement, at: 0)
             var task = Array(Public.tasks[0])
             
-            
+            if task[0] == "#"{
+                task[0] = "²"
+            }
             if task[0] == "⁰" {
                 
             }
