@@ -19,9 +19,15 @@ class FocusAssistViewViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeProgress: UIProgressView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     
     var taskName = String()
-    
+    var cancel = false
+    @IBAction func closeAction(_ sender: Any) {
+        
+        dismiss(animated: true)
+        cancel = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +38,7 @@ class FocusAssistViewViewController: UIViewController {
         \(time) mins left
         """
         timeProgress.progress = (25-Float(time))/25
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self,   selector: (#selector(FocusAssistViewViewController.updateTimer)), userInfo: nil, repeats: true)
         timeProgress.layer.cornerRadius = 20
         
     }
@@ -43,16 +49,13 @@ class FocusAssistViewViewController: UIViewController {
         \(time) mins left
         """
         timeProgress.progress = (25-Float(time))/25
-       /* if (time == 0) && (nameLabel.text != "Break time!") {
-            AudioServicesPlayAlertSound(SystemSoundID(1005))
-            time = 5
-            timeLabel.text = "\(time) mins left"
-           
-        }*/
+       
         if (time == 0)  {
-            AudioServicesPlayAlertSound(SystemSoundID(1005))
+            if cancel{
+                
+            }else{ AudioServicesPlayAlertSound(SystemSoundID(1005))
             dismiss(animated: true)
-          
+            }
         }
     }
     

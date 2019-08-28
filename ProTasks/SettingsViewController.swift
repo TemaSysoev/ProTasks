@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
                      
                 // Get the default leaderboard ID
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
-                    if error != nil { print(error)
+                    if error != nil { print(error as Any)
                     } else { self.gcDefaultLeaderBoard = leaderboardIdentifer! }
                 })
                  
@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
                 // 3. Game center is not enabled on the users device
                 self.gcEnabled = false
                 print("Local player could not be authenticated!")
-                print(error)
+                print(error as Any)
             }
         }
     }
@@ -122,15 +122,11 @@ class SettingsViewController: UIViewController, GKGameCenterControllerDelegate {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         authenticateLocalPlayer()
         Public.doneTasksCouner = loadTasksCounter()
         leaderboardButton.layer.cornerRadius = 6
         score = Public.doneTasksCouner
        
-
-        
     }
     
 

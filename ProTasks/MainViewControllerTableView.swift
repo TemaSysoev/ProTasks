@@ -72,6 +72,8 @@ struct Public {
     static var tasks: [String] = [] //Массив задач
     static var newTaskPublic = String() //Новая задача
     static var doneTasksCouner: Int = 0
+    static var hotTasksEnabled = false
+    static var hotTasksMax = 5
 }
 
 typealias Animation = (UITableViewCell, IndexPath, UITableView) -> Void
@@ -130,6 +132,7 @@ class MainViewTableViewController: UITableViewController {
     @IBOutlet weak var addButtonItem: UIBarButtonItem! //Кнопка +
     @IBOutlet weak var sortButton: UIBarButtonItem!
     @IBOutlet weak var totalTasks: UIBarButtonItem!
+    @IBOutlet weak var cloudButton: UIBarButtonItem!
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
@@ -150,10 +153,14 @@ class MainViewTableViewController: UITableViewController {
         
     }
     func loadTasks() -> [String]{
-        if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+       /* if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
+            
             var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
             let total = (syncedTasks?.count)!
             syncedTasks?.remove(at: total - 1)
+            for i in syncedTasks?.count {
+                if syncedTasks[i] !=
+            }
             return syncedTasks as! [String]
         } else {
             if UserDefaults.standard.array(forKey: "Key") != nil {
@@ -165,7 +172,34 @@ class MainViewTableViewController: UITableViewController {
             } else {
                 return ["² Welcome!"]
             }
+        }*/
+        if UserDefaults.standard.array(forKey: "Key") != nil {
+            var loadedTasks = UserDefaults.standard.array(forKey: "Key")
+            let loadedTotal = (loadedTasks?.count)!
+            loadedTasks?.remove(at: loadedTotal - 1)
+            
+            
+            var syncedTasks = NSUbiquitousKeyValueStore.default.array(forKey: "Key")
+            let syncedTotal = (syncedTasks?.count)!
+            syncedTasks?.remove(at: syncedTotal - 1)
+            
+            let mergeCounter = syncedTotal - loadedTotal
+            
+            switch mergeCounter {
+            case 0:
+                for i in loadedTasks {
+                    if loadedTasks[i] != syncedTasks[i]
+                }
+            default:
+                <#code#>
+            }
+           
+    
+        } else {
+            return ["² Welcome!"]
         }
+        
+        
     }
     func loadTasksCounter() -> Int{
         if NSUbiquitousKeyValueStore.default.array(forKey: "Key") != nil {
@@ -181,30 +215,23 @@ class MainViewTableViewController: UITableViewController {
                 let counter: Int = (syncedTasks![total! - 1] as! Int)
                 return counter
                 
-                
-                
             } else {
                 return 0
             }
         }
     }
+    func saveHT(enable: Bool, max: Int) {
+        UserDefaults.standard.set(enable, forKey: "HotEnable")
+        UserDefaults.standard.set(max, forKey: "HotMax")
+        
+    }
+    func loadHTEnabled() -> Bool {
+        return UserDefaults.standard.bool(forKey: "HotEnable")
+    }
     
-    /*func loadDoneCounter() -> Int {
-        /*return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))*/
-        //if NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter") != 0 {
-            //return UserDefaults.standard.array(forKey:"Key")!
-           // return Int(NSUbiquitousKeyValueStore.default.double(forKey: "tasksCounter"))
-        //} else {
-          //  if UserDefaults.standard.double(forKey:"tasksCounter") != 0 {
-                
-                return Int(UserDefaults.standard.double(forKey:"tasksCounter"))
-            //} else {
-              //  return 0
-           // }
-            
-        //}
-    }*/
-    
+    func loadHTMax() -> Int {
+        return UserDefaults.standard.integer(forKey: "HotMxx")
+    }
     
    
     @IBAction func showAddTask(_ sender: Any) {
@@ -212,23 +239,20 @@ class MainViewTableViewController: UITableViewController {
         alert.view.layer.bounds = CGRect(x: 0, y: 0, width: 10, height: 10)
         alert.view.tintColor = UIColor(named: "ProTasksC")
         alert.addTextField { (textField) in
-            textField.text = "² "
             textField.borderStyle = .none
             textField.backgroundColor = .systemBackground
             
         }
         alert.addAction(UIAlertAction(title: "+", style: .default, handler: { [weak alert] (_) in
-            if alert?.textFields![0].text != "² " {
-                Public.tasks.append((alert?.textFields![0].text!)!)
+            if alert?.textFields![0].text! != ""{
+                Public.tasks.append(("² " + (alert?.textFields![0].text!)!))
+                
             }
             self.animationSelector = 1
             self.tableView.reloadData()
-            
-            
-            
+           
         }))
         self.present(alert, animated: true, completion: nil)
-        //self.saveTasks(tasks: Public.tasks) //Сохраниние при добавлении новой задачи
         self.saveAndSync(tasks: Public.tasks)
         NSUbiquitousKeyValueStore.default.synchronize()
         self.animationSelector = 0
@@ -244,6 +268,15 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.synchronize()
         self.totalTasks.title = ""
     }
+    @IBAction func cloudSync(_ sender: Any) {
+        saveAndSync(tasks: Public.tasks)
+        if NSUbiquitousKeyValueStore.init().synchronize() {
+            cloudButton.image = UIImage(named: "System.icloud.fill")
+        } else {
+            cloudButton.image = UIImage(named: "System.xmark.icloud")
+        }
+    }
+
 // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,6 +288,9 @@ class MainViewTableViewController: UITableViewController {
         NSUbiquitousKeyValueStore.default.synchronize()
         Public.tasks = loadTasks() //Загрузка списка задач
         Public.doneTasksCouner = loadTasksCounter()
+        Public.hotTasksEnabled = loadHTEnabled()
+        Public.hotTasksMax = loadHTMax()
+        
         
         self.saveAndSync(tasks: Public.tasks)
        
@@ -297,8 +333,8 @@ class MainViewTableViewController: UITableViewController {
         
         cell.textLabel?.text = task
         cell.selectionStyle = UITableViewCell.SelectionStyle.none //отключения выбора ячейки
-        
-        //saveTasks(tasks: Public.tasks)
+//        cell.contentView.layer.cornerRadius = 6
+//        saveTasks(tasks: Public.tasks)
         self.saveAndSync(tasks: Public.tasks)
         NSUbiquitousKeyValueStore.default.synchronize()
         return cell

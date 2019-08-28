@@ -48,7 +48,7 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     
     func addTaskAction() { //Добаление заадчи
-        if nameTextField.text != "" {
+        if nameTextField.text != "² " {
             Public.newTaskPublic = "² " + nameTextField.text!
             Public.tasks.append(Public.newTaskPublic) //добавление в массив
                    mainVC.tableView.reloadData() //Обновление TableView
